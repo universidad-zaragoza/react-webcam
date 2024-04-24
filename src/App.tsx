@@ -1,26 +1,22 @@
-import Webcam from "react-webcam";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import CameraApp from "./CameraApp";
+import DebugView from "./Debug";
+import { MessageProvider } from "./MessageProvider";
 import "./App.css";
-import { Form, Row, Col, Container } from "react-bootstrap";
 
 function App() {
   return (
-    <div className="App">
-      <Container>
-        <Row>
-          <Col>
-            <Webcam />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Default file input example</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <React.StrictMode>
+      <MessageProvider>
+        <BrowserRouter basename="/react-webcam">
+          <Routes>
+            <Route path="/" element={<CameraApp />} />
+            <Route path="/debug" element={<DebugView />} />
+          </Routes>
+        </BrowserRouter>
+      </MessageProvider>
+    </React.StrictMode>
   );
 }
 
